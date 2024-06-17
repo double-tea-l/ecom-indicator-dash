@@ -2,8 +2,8 @@ import requests
 import pandas as pd
 import json
 from prettytable import PrettyTable
-import utils
-from prettytable import PrettyTable
+from data import utils 
+
 
 class get_major_indicators():
     

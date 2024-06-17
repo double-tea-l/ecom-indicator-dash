@@ -1,8 +1,8 @@
 
 import pandas as pd
-import indicators_data as indicators
 import math
 from prettytable import PrettyTable
+from data import indicators_data as indicators
 
 
 
