@@ -1,16 +1,20 @@
 
 import pandas as pd
-import ecom_indicators_data as ind_data
+import indicators_data as indicators
 import math
+from prettytable import PrettyTable
+
 
 
 def df_gdp():
     
-    #inputs
-    us_gdp_pct_change = ind_data.us_gdp_pct_change
-    us_gdp = ind_data.us_gdp
-    us_real_gdp =  ind_data.us_real_gdp
+    i = indicators.get_major_indicators()
     
+    #inputs
+    us_gdp_pct_change = i.gdp_pct_change
+    us_gdp = i.gdp
+    us_real_gdp = i.real_gdp
+     
     # format
     df_gdp = pd.merge(us_gdp_pct_change, us_gdp, on = 'date', how = 'outer')
     df_gdp = pd.merge(df_gdp, us_real_gdp, on = 'date', how = 'outer')
@@ -31,6 +35,4 @@ def df_gdp():
     df_gdp['Real_GDP'] = df_gdp['Real_GDP'].apply(lambda x: math.ceil(x) if pd.notnull(x) else x)
     
     return df_gdp
-
-
 

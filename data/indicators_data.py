@@ -1,21 +1,19 @@
 import requests
 import pandas as pd
 import json
-import prettytable
+from prettytable import PrettyTable
 import utils
+from prettytable import PrettyTable
 
 class get_major_indicators():
     
-    def __init__(self, series_id):
-        
-        # inputs
-        self.series_id = series_id
+    def __init__(self):
         
         # outputs
-        self.fetch_data = self.fetch_data()
         self.gdp = self.get_gdp()
         self.real_gdp = self.get_real_gdp()
         self.gdp_pct_change = self.get_gdp_pct_change()
+
         
     def get_gdp(self):
 
