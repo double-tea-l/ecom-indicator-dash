@@ -40,19 +40,19 @@ def df_gdp():
 def df_cpi_ppi():
     
     i = indicators.get_major_indicators()
-    cpi = i.get_cpi
-    ppi = i.get_ppi
+    cpi = i.cpi
+    ppi = i.ppi
     
         # format
     df_cpi_ppi = pd.merge(cpi, ppi, on = 'date', how = 'outer')
     df_cpi_ppi = df_cpi_ppi.sort_values(by='date', ascending= True).reset_index(drop = True)
     df_cpi_ppi['Month'] = pd.to_datetime(df_cpi_ppi['date'])
 
-    # Convert 'GDP' and 'Real_GDP' columns to numeric, coercing errors
-    df_cpi_ppi['CPI'] = pd.to_numeric(df_cpi_ppi['CPI'], errors='coerce')
-    df_cpi_ppi['PPI'] = pd.to_numeric(df_cpi_ppi['PPI'], errors='coerce')
-    # Round up GDP values to integers
-    df_cpi_ppi['CPI'] = df_cpi_ppi['CPI'].apply(lambda x: math.ceil(x) if pd.notnull(x) else x)
-    df_cpi_ppi['PPI'] = df_cpi_ppi['PPI'].apply(lambda x: math.ceil(x) if pd.notnull(x) else x)
+    # # Convert 'GDP' and 'Real_GDP' columns to numeric, coercing errors
+    # df_cpi_ppi['CPI'] = pd.to_numeric(df_cpi_ppi['CPI'], errors='coerce')
+    # df_cpi_ppi['PPI'] = pd.to_numeric(df_cpi_ppi['PPI'], errors='coerce')
+    # # Round up GDP values to integers
+    # df_cpi_ppi['CPI'] = df_cpi_ppi['CPI'].apply(lambda x: math.ceil(x) if pd.notnull(x) else x)
+    # df_cpi_ppi['PPI'] = df_cpi_ppi['PPI'].apply(lambda x: math.ceil(x) if pd.notnull(x) else x)
     
     return df_cpi_ppi

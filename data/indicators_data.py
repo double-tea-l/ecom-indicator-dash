@@ -113,7 +113,7 @@ class get_major_indicators():
 
         df = utils.fetch_data(series_id)
         df = df[['date','value']]
-        df.rename(columns = {'date':'Month', 'value': 'CPI'}, inplace= True)
+        df.rename(columns = {'value': 'CPI'}, inplace= True)
        
         return df  
     
@@ -125,7 +125,7 @@ class get_major_indicators():
 
         df = utils.fetch_data(series_id)
         df = df[['date','value']]
-        df.rename(columns = {'date':'Month', 'value': 'PPI'}, inplace= True)
+        df.rename(columns = {'value': 'PPI'}, inplace= True)
        
         return df     
     

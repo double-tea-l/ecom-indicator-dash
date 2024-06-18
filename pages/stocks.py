@@ -16,12 +16,12 @@ def show_stocks():
     # CPI and PPI Chart
     df_cpi_ppi = ind_prep.df_cpi_ppi()
 
-    fig2 = go.Figure()
+    fig = go.Figure()
 
-    fig2.add_trace(go.Scatter(x=df_cpi_ppi['date'], y=df_cpi_ppi['CPI'], mode='lines', name='CPI', line=dict(color='red')))
-    fig2.add_trace(go.Scatter(x=df_cpi_ppi['date'], y=df_cpi_ppi['PPI'], mode='lines', name='PPI', line=dict(color='blue')))
+    fig.add_trace(go.Scatter(x=df_cpi_ppi['date'], y=df_cpi_ppi['CPI'], mode='lines', name='CPI', line=dict(color='red')))
+    fig.add_trace(go.Scatter(x=df_cpi_ppi['date'], y=df_cpi_ppi['PPI'], mode='lines', name='PPI', line=dict(color='blue')))
   
-    fig2.update_layout(
+    fig.update_layout(
         title='CPI and PPI Over Time',
         xaxis_title='Time Period',
         yaxis_title='Index Value',
@@ -36,10 +36,10 @@ def show_stocks():
         )
     )
 
-    fig2.update_xaxes(tickangle=0)
+    fig.update_xaxes(tickangle=0)
 
-    st.plotly_chart(fig2, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True)
 
-# Call the function to show indicators
-if __name__ == "__main__":
-    show_indicators()
+# # Call the function to show indicators
+# if __name__ == "__main__":
+#     show_stocks()
