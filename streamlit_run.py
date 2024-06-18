@@ -5,17 +5,17 @@ import pages as pg
 import os
 
 
-st.set_page_config(initial_sidebar_state="collapsed")
+# st.set_page_config(initial_sidebar_state="collapsed")
 # Set the page config at the start of the main script
-# st.set_page_config(
-#     page_title="US Population Dashboard",
-#     page_icon="🏂",
-#     layout="wide",
-#     initial_sidebar_state="expanded"
-# )
+st.set_page_config(
+    page_title="US Population Dashboard",
+    page_icon="🏂",
+    layout="wide",
+    initial_sidebar_state="collapsed"
+)
 
 
-pages = ["Indicators", "User Guide", "API", "Examples", "Community", "GitHub"]
+pages = ["Indicators", "Stock Index", "Knowledge", "Resources", "GitHub"]
 
 parent_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -37,7 +37,8 @@ styles = {
     },
     "active": {
         "background-color": "white",
-        "color": "var(--text-color)",
+        # "color": "var(--text-color)",
+        "color": "black",
         "font-weight": "normal",
         "padding": "14px",
     }

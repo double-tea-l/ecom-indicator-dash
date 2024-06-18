@@ -10,6 +10,7 @@ import plotly.graph_objects as go
 from streamlit_navigation_bar import st_navbar
 from data import indicators_prep as ind_prep
 
+
 def show_indicators():
 
 
@@ -22,11 +23,7 @@ def show_indicators():
 
     # Add trace for GDP
     fig.add_trace(go.Scatter(x=data['date'], y=data['GDP'], mode='lines', name='GDP', line=dict(color='red')))
-
-    # Add trace for Real GDP
     fig.add_trace(go.Scatter(x=data['date'], y=data['Real_GDP'], mode='lines', name='Real GDP', line=dict(color='blue')))
-
-    # Add trace for GDP percentage change on secondary y-axis
     fig.add_trace(go.Scatter(x=data['date'], y=data['GDP_pct_change'], mode='lines', name='GDP % Change', line=dict(color='green', dash='dot'), yaxis='y2'))
 
     # Update layout for secondary y-axis
