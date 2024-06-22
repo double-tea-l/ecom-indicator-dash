@@ -4,6 +4,7 @@ import json
 import prettytable
 
 
+@st.cache
 
 def fetch_data(series_id):
     
