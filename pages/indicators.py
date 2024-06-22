@@ -16,8 +16,11 @@ def show_indicators():
     # Get the data
     df_gdp = ind_prep.df_gdp()
     df_cpi_ppi = ind_prep.df_cpi_ppi()
+    df_interest_rate = ind_prep.df_interest_rate()
+    df_unemployment_rate = ind_prep.df_unemployment_rate()
+    df_real_m1_m2 = ind_prep.df_real_m1_m2()
 
-    # Create the first plotly figure for GDP
+    # Create figure for GDP
     fig_gdp = go.Figure()
     fig_gdp.add_trace(go.Scatter(x=df_gdp['date'], y=df_gdp['GDP'], mode='lines', name='GDP', line=dict(color='red')))
     fig_gdp.add_trace(go.Scatter(x=df_gdp['date'], y=df_gdp['Real_GDP'], mode='lines', name='Real GDP', line=dict(color='blue')))
@@ -46,7 +49,7 @@ def show_indicators():
     )
     fig_gdp.update_xaxes(tickangle=0)
 
-    # Create the second plotly figure for CPI and PPI
+    # Create figure for CPI and PPI
     fig_cpi_ppi = go.Figure()
     fig_cpi_ppi.add_trace(go.Scatter(x=df_cpi_ppi['date'], y=df_cpi_ppi['CPI'], mode='lines', name='CPI', line=dict(color='red')))
     fig_cpi_ppi.add_trace(go.Scatter(x=df_cpi_ppi['date'], y=df_cpi_ppi['PPI'], mode='lines', name='PPI', line=dict(color='blue')))
@@ -67,6 +70,75 @@ def show_indicators():
     )
     fig_cpi_ppi.update_xaxes(tickangle=0)
 
+
+     # Create figure for Interest Rates
+    fig_interest_rate = go.Figure()
+    fig_interest_rate.add_trace(go.Scatter(x=df_interest_rate['date'], y=df_interest_rate['Interest_Rate_10yr'], mode='lines', name='Interest Rate: 10 years', line=dict(color='red')))
+    fig_interest_rate.add_trace(go.Scatter(x=df_interest_rate['date'], y=df_interest_rate['Interest_Rate_3mo'], mode='lines', name='Interest Rate: 3 months', line=dict(color='blue')))
+  
+    fig_interest_rate.update_layout(
+        title='Interest Rate',
+        xaxis_title='Time Period',
+        yaxis_title='Index Value',
+        yaxis=dict(tickformat=','),
+        xaxis=dict(type='date'),
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.02,
+            xanchor="right",
+            x=1
+        )
+    )
+    fig_interest_rate.update_xaxes(tickangle=0)   
+    
+    
+    
+     # Create figure for Unemployment Rate
+    fig_unrate = go.Figure()
+    fig_unrate.add_trace(go.Scatter(x=df_unemployment_rate['date'], y=df_unemployment_rate['Unemployment_Rate'], mode='lines', name='Unemployment Rate', line=dict(color='red')))
+
+    fig_unrate.update_layout(
+        title='Unemployment Rate',
+        xaxis_title='Time Period',
+        yaxis_title='Index Value',
+        yaxis=dict(tickformat=','),
+        xaxis=dict(type='date'),
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.02,
+            xanchor="right",
+            x=1
+        )
+    )
+    fig_unrate.update_xaxes(tickangle=0)   
+    
+    
+     # Create figure for Interest Rates
+    fig_real_m1_m2 = go.Figure()
+    fig_real_m1_m2.add_trace(go.Scatter(x=df_real_m1_m2['date'], y=df_real_m1_m2['Real_M1'], mode='lines', name='Real M1', line=dict(color='red')))
+    fig_real_m1_m2.add_trace(go.Scatter(x=df_real_m1_m2['date'], y=df_real_m1_m2['Real_M2'], mode='lines', name='Real M2', line=dict(color='blue')))
+  
+    fig_real_m1_m2.update_layout(
+        title='Real M1 and M2',
+        xaxis_title='Time Period',
+        yaxis_title='Index Value',
+        yaxis=dict(tickformat=','),
+        xaxis=dict(type='date'),
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.02,
+            xanchor="right",
+            x=1
+        )
+    )
+    fig_real_m1_m2.update_xaxes(tickangle=0)  
+    # df_real_m1_m2 = ind_prep.df_real_m1_m2()
+
+
+
     # Display the plots in Streamlit using columns
     col1, col2 = st.columns(2)
 
@@ -75,3 +147,12 @@ def show_indicators():
 
     with col2:
         st.plotly_chart(fig_cpi_ppi, use_container_width=True)
+        
+        # Second row with two columns
+    col3, col4 = st.columns(2)
+    
+    with col3:
+        st.plotly_chart(fig_interest_rate, use_container_width=True)
+
+    with col4:
+        st.plotly_chart(fig_real_m1_m2, use_container_width=True)

@@ -15,7 +15,7 @@ class get_major_indicators():
         self.gdp_pct_change = self.get_gdp_pct_change()
         self.ir_10yr = self.get_ir_10yr()
         self.ir_3mo = self.get_ir_3mo()
-        self.unemployment_rate = self.get_unemployment_rate()
+        self.unemployment_rate = self.get_unrate()
         self.cpi = self.get_cpi()
         self.ppi = self.get_ppi()
         self.real_m1 = self.get_real_m1()
@@ -76,7 +76,7 @@ class get_major_indicators():
 
         df = utils.fetch_data(series_id)
         df = df[['date','value']]
-        df.rename(columns = {'date':'Month', 'value': 'Interest_Rate_10yr_Bond'}, inplace= True)
+        df.rename(columns = {'date':'Month', 'value': 'Interest_Rate_10yr'}, inplace= True)
        
         return df
     
@@ -88,12 +88,12 @@ class get_major_indicators():
 
         df = utils.fetch_data(series_id)
         df = df[['date','value']]
-        df.rename(columns = {'date':'Month', 'value': 'Interest_Rate_3mo_Bond'}, inplace= True)
+        df.rename(columns = {'date':'Month', 'value': 'Interest_Rate_3mo'}, inplace= True)
        
         return df    
     
 
-    def get_unemployment_rate(self):
+    def get_unrate(self):
     
         #search series_id by dataset: https://fredaccount.stlouisfed.org/public/datalist/
         # Unemployment Rate

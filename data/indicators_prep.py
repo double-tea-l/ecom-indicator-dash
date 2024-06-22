@@ -56,3 +56,43 @@ def df_cpi_ppi():
     # df_cpi_ppi['PPI'] = df_cpi_ppi['PPI'].apply(lambda x: math.ceil(x) if pd.notnull(x) else x)
     
     return df_cpi_ppi
+
+
+def df_interest_rate():
+
+    i = indicators.get_major_indicators()
+    ir_10yr = i.ir_10yr
+    ir_3mo = i.ir_3mo
+    
+    df_ir = pd.merge(ir_10yr, ir_3mo, on = 'date', how = 'outer')
+    df_ir = df_ir.sort_values(by='date', ascending= True).reset_index(drop = True)
+    df_ir['Month'] = pd.to_datetime(df_ir['date']) 
+    
+    return df_ir
+
+
+def df_unemployment_rate():
+
+    i = indicators.get_major_indicators()
+    unemployment_rate = i.unemployment_rate
+
+    df_ur = unemployment_rate.sort_values(by='date', ascending= True).reset_index(drop = True)
+    df_ur['Month'] = pd.to_datetime(df_ur['date']) 
+    
+    return df_ur
+
+
+
+def df_real_m1_m2():
+
+    i = indicators.get_major_indicators()
+    real_m1 = i.real_m1
+    real_m2 = i.real_m2
+
+    df_real_m1_m2 = pd.merge(real_m1, real_m2, on = 'date', how = 'outer')
+    df_real_m1_m2 = df_real_m1_m2.sort_values(by='date', ascending= True).reset_index(drop = True)
+    df_real_m1_m2['Month'] = pd.to_datetime(df_real_m1_m2['date']) 
+    
+    return df_real_m1_m2
+
+
