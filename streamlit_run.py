@@ -5,62 +5,17 @@ import pages as pg
 import os
 
 
-# st.set_page_config(initial_sidebar_state="collapsed")
-# Set the page config at the start of the main script
-st.set_page_config(
-    page_title="US Population Dashboard",
-    page_icon="🏂",
-    layout="wide",
-    initial_sidebar_state="collapsed"
-)
+from pages import indicators, stocks
 
-
-pages = ["Indicators", "Stock Index", "Knowledge", "Resources", "GitHub"]
-
-parent_dir = os.path.dirname(os.path.abspath(__file__))
-
-# logo_path = os.path.join(parent_dir, "cubes.svg")
-
-urls = {"GitHub": "https://github.com/double-tea-l/ecom-indicator-dash/"}
-
-styles = {
-    "nav": {
-        "background-color": "royalblue",
-        "justify-content": "left",
-    },
-    "img": {
-        "padding-right": "14px",
-    },
-    "span": {
-        "color": "white",
-        "padding": "14px",
-    },
-    "active": {
-        "background-color": "white",
-        # "color": "var(--text-color)",
-        "color": "black",
-        "font-weight": "normal",
-        "padding": "14px",
-    }
+pages = {
+    'Indicators': indicators
+    , 'Stocks': stocks
 }
 
-options = {
-    "show_menu": False,
-    "show_sidebar": False,
-}
+st.sidebar.title('Navigation')
 
-page = st_navbar(
-    pages,
-    # logo_path=logo_path,
-    urls=urls,
-    styles=styles,
-    options=options,
-)
+choice = st.sidebar.radio("Choose a page:", list(pages.keys()))
 
-functions = {
-    "Indicators": pg.show_indicators,
-    "Stock Index": pg.show_stocks
-}
-go_to = functions.get(page)
-if go_to:
-    go_to()
+page = pages[choice]
+
+page.app()

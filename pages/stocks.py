@@ -11,7 +11,7 @@ from streamlit_navigation_bar import st_navbar
 from data import indicators_prep as ind_prep
 
 
-def show_stocks():
+def app():
     
     # CPI and PPI Chart
     df_cpi_ppi = ind_prep.df_cpi_ppi()
