@@ -5,7 +5,7 @@ import prettytable
 import streamlit as st
 
 
-@st.cache
+@st.cache_data
 
 def fetch_data(series_id):
     
