@@ -25,7 +25,7 @@ urls = {"GitHub": "https://github.com/double-tea-l/ecom-indicator-dash/"}
 
 styles = {
     "nav": {
-        "background-color": "royalblue",
+        "background-color": "grey",
         "justify-content": "left",
     },
     "img": {
@@ -38,7 +38,7 @@ styles = {
     "active": {
         "background-color": "white",
         # "color": "var(--text-color)",
-        "color": "black",
+        "color": "grey",
         "font-weight": "normal",
         "padding": "14px",
     }

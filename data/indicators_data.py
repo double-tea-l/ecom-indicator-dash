@@ -76,7 +76,7 @@ class get_major_indicators():
 
         df = utils.fetch_data(series_id)
         df = df[['date','value']]
-        df.rename(columns = {'date':'Month', 'value': 'Interest_Rate_10yr'}, inplace= True)
+        df.rename(columns = {'value': 'Interest_Rate_10yr'}, inplace= True)
        
         return df
     
@@ -88,7 +88,7 @@ class get_major_indicators():
 
         df = utils.fetch_data(series_id)
         df = df[['date','value']]
-        df.rename(columns = {'date':'Month', 'value': 'Interest_Rate_3mo'}, inplace= True)
+        df.rename(columns = {'value': 'Interest_Rate_3mo'}, inplace= True)
        
         return df    
     
@@ -101,7 +101,7 @@ class get_major_indicators():
 
         df = utils.fetch_data(series_id)
         df = df[['date','value']]
-        df.rename(columns = {'date':'Month', 'value': 'Unemployment_Rate'}, inplace= True)
+        df.rename(columns = {'value': 'Unemployment_Rate'}, inplace= True)
        
         return df      
 
@@ -157,7 +157,7 @@ class get_major_indicators():
 
         df = utils.fetch_data(series_id)
         df = df[['date','value']]
-        df.rename(columns = {'date':'Month', 'value': 'Real_M1'}, inplace= True)
+        df.rename(columns = {'value': 'Real_M1'}, inplace= True)
        
         return df  
     
@@ -185,7 +185,7 @@ class get_major_indicators():
 
         df = utils.fetch_data(series_id)
         df = df[['date','value']]
-        df.rename(columns = {'date':'Month', 'value': 'Real_M2'}, inplace= True)
+        df.rename(columns = {'value': 'Real_M2'}, inplace= True)
        
         return df  
     
