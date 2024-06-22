@@ -2,6 +2,7 @@ import requests
 import pandas as pd
 import json
 import prettytable
+import streamlit as st
 
 
 @st.cache
