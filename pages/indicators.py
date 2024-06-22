@@ -11,7 +11,7 @@ from streamlit_navigation_bar import st_navbar
 from data import indicators_prep as ind_prep
 
 
-def app():
+def show_indicators():
     
     # Get the data
     df_gdp = ind_prep.df_gdp()
