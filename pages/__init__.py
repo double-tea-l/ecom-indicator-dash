@@ -1,2 +1,2 @@
-from pages.indicators import show_indicators
-from pages.stocks import show_stocks
+from pages.indicators import app
+from pages.stocks import app
