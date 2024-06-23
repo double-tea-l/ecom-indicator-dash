@@ -1,18 +1,8 @@
 
 
-[server]
-headless = false
-port = 8501
-enableCORS = false
-
-# Theme settings
 [theme]
-primaryColor = "#1f77b4"
-backgroundColor = "#f0f0f5"
-secondaryBackgroundColor = "#e0e0ef"
-textColor = "#262730"
-font = "sans serif"
-
-# Logging settings
-[logger]
-level = "info"
+primaryColor = "#b4bcba"
+backgroundColor = "#b4bcba"
+secondaryBackgroundColor = "#b4bcba"
+textColor = "#DCDCDC"
+font = "sans-serif"
