@@ -11,7 +11,7 @@ st.set_page_config(
     page_title="Dashboard",
     page_icon="🏂",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    # initial_sidebar_state="collapsed"
 )
 
 
@@ -23,29 +23,29 @@ parent_dir = os.path.dirname(os.path.abspath(__file__))
 
 urls = {"GitHub": "https://github.com/double-tea-l/ecom-indicator-dash/"}
 
-# styles = {
-#     "nav": {
-#         "background-color": "grey",
-#         "justify-content": "left",
-#     },
-#     "img": {
-#         "padding-right": "14px",
-#     },
-#     "span": {
-#         "color": "white",
-#         "padding": "14px",
-#     },
-#     "active": {
-#         "background-color": "white",
-#         # "color": "var(--text-color)",
-#         "color": "grey",
-#         "font-weight": "normal",
-#         "padding": "14px",
-#     }
-# }
+styles = {
+    "nav": {
+        # "background-color": "grey",
+        "justify-content": "left",
+    },
+    "img": {
+        "padding-right": "14px",
+    },
+    "span": {
+        "color": "white",
+        "padding": "14px",
+    },
+    "active": {
+        "background-color": "white",
+        # "color": "var(--text-color)",
+        # "color": "grey",
+        "font-weight": "normal",
+        "padding": "14px",
+    }
+}
 
 options = {
-    "show_menu": False,
+    "show_menu": True,
     "show_sidebar": False,
 }
 
