@@ -9,6 +9,7 @@ import altair as alt
 import plotly.graph_objects as go
 from streamlit_navigation_bar import st_navbar
 from data import indicators_prep as ind_prep
+from st_aggrid import AgGrid, GridOptionsBuilder
 
 
 def show_indicators():
@@ -22,9 +23,9 @@ def show_indicators():
 
     # Create figure for GDP
     fig_gdp = go.Figure()
-    fig_gdp.add_trace(go.Scatter(x=df_gdp['date'], y=df_gdp['GDP'], mode='lines', name='GDP', line=dict(color='red')))
-    fig_gdp.add_trace(go.Scatter(x=df_gdp['date'], y=df_gdp['Real_GDP'], mode='lines', name='Real GDP', line=dict(color='blue')))
-    fig_gdp.add_trace(go.Scatter(x=df_gdp['date'], y=df_gdp['GDP_pct_change'], mode='lines', name='GDP % Change', line=dict(color='green', dash='dot'), yaxis='y2'))
+    fig_gdp.add_trace(go.Scatter(x=df_gdp['date'], y=df_gdp['GDP'], mode='lines', name='GDP', line=dict(color='#008080')))
+    fig_gdp.add_trace(go.Scatter(x=df_gdp['date'], y=df_gdp['Real_GDP'], mode='lines', name='Real GDP', line=dict(color='#4682B4')))
+    fig_gdp.add_trace(go.Scatter(x=df_gdp['date'], y=df_gdp['GDP_pct_change'], mode='lines', name='GDP % Change', line=dict(color='#483D8B', dash='dot'), yaxis='y2'))
 
     fig_gdp.update_layout(
         title='GDP and Real GDP Over Time',
@@ -48,6 +49,17 @@ def show_indicators():
         )
     )
     fig_gdp.update_xaxes(tickangle=0)
+    
+    # GDP table
+    fig_gdp_table = go.Figure(data=[go.Table(
+    header=dict(values=list(df_gdp.columns),
+                fill_color='paleturquoise',
+                align='left'),
+    cells=dict(values=[df_gdp.date, df_gdp.GDP, df_gdp.Real_GDP, df_gdp.GDP_pct_change],
+               fill_color='lavender',
+               align='left'))
+                ])
+
 
     # Create figure for CPI and PPI
     fig_cpi_ppi = go.Figure()
@@ -146,7 +158,9 @@ def show_indicators():
         st.plotly_chart(fig_gdp, use_container_width=True)
 
     with col2:
-        st.plotly_chart(fig_cpi_ppi, use_container_width=True)
+        
+         st.plotly_chart(fig_gdp_table, use_container_width=True)
+        # st.plotly_chart(fig_cpi_ppi, use_container_width=True)
         
         # Second row with two columns
     col3, col4 = st.columns(2)

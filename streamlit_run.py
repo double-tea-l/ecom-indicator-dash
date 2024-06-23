@@ -11,7 +11,7 @@ st.set_page_config(
     page_title="Dashboard",
     page_icon="🏂",
     layout="wide",
-    # initial_sidebar_state="collapsed"
+    initial_sidebar_state="collapsed"
 )
 
 
@@ -25,7 +25,7 @@ urls = {"GitHub": "https://github.com/double-tea-l/ecom-indicator-dash/"}
 
 styles = {
     "nav": {
-        # "background-color": "grey",
+        "background-color": "grey",
         "justify-content": "left",
     },
     "img": {
@@ -37,8 +37,8 @@ styles = {
     },
     "active": {
         "background-color": "white",
-        # "color": "var(--text-color)",
-        # "color": "grey",
+        "color": "var(--text-color)",
+        "color": "grey",
         "font-weight": "normal",
         "padding": "14px",
     }
@@ -53,7 +53,7 @@ page = st_navbar(
     pages,
     # logo_path=logo_path,
     urls=urls,
-    # styles=styles,
+    styles=styles,
     options=options,
 )
 
