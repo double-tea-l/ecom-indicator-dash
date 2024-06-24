@@ -12,33 +12,31 @@ from data import indicators_prep as ind_prep
 
 
 def show_stocks():
-    
-    # CPI and PPI Chart
-    df_cpi_ppi = ind_prep.df_cpi_ppi()
 
-    fig = go.Figure()
+    df = pd.DataFrame({
+        "Index": ['SP500', 'DJIA', 'NASDAQ100'],
+        "Composition": ["500 Companies", "30 Blue-chip Companies", "100 Companies"],
+        "Market_Value": ['70-80% US Market','25%',' '],
+        "Method": ['Market Value Weighted Avg','Price Weighted Average','']
+    })
 
-    fig.add_trace(go.Scatter(x=df_cpi_ppi['date'], y=df_cpi_ppi['CPI'], mode='lines', name='CPI', line=dict(color='red')))
-    fig.add_trace(go.Scatter(x=df_cpi_ppi['date'], y=df_cpi_ppi['PPI'], mode='lines', name='PPI', line=dict(color='blue')))
-  
-    fig.update_layout(
-        title='CPI and PPI Over Time',
-        xaxis_title='Time Period',
-        yaxis_title='Index Value',
-        yaxis=dict(tickformat=','),
-        xaxis=dict(type='date'),
-        legend=dict(
-            orientation="h",
-            yanchor="bottom",
-            y=1.02,
-            xanchor="right",
-            x=1
-        )
-    )
+    true_html = '<input type="checkbox" checked disabled="true">'
+    false_html = '<input type="checkbox" disabled="true">'
 
-    fig.update_xaxes(tickangle=0)
+    # df['D'] = df['D'].apply(lambda b: true_html if b else false_html)
 
-    st.plotly_chart(fig, use_container_width=True)
+    st.markdown(df.to_html(escape=False), unsafe_allow_html=True)
+
+    # txt = st.text_area(
+    # "Text to analyze",
+    # "It was the best of times, it was the worst of times, it was the age of "
+    # "wisdom, it was the age of foolishness, it was the epoch of belief, it "
+    # "was the epoch of incredulity, it was the season of Light, it was the "
+    # "season of Darkness, it was the spring of hope, it was the winter of "
+    # "despair, (...)",
+    # )
+
+    # st.write(f"You wrote {len(txt)} characters.")
 
 # # Call the function to show indicators
 # if __name__ == "__main__":

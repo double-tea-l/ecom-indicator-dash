@@ -52,11 +52,11 @@ def show_indicators():
     
     # GDP table
     fig_gdp_table = go.Figure(data=[go.Table(
-    header=dict(values=list(df_gdp.columns),
-                fill_color='paleturquoise',
+    header=dict(values=list(df_gdp[['Quarter','GDP','Real_GDP','GDP_pct_change']].columns),
+                fill_color='white',
                 align='left'),
-    cells=dict(values=[df_gdp.date, df_gdp.GDP, df_gdp.Real_GDP, df_gdp.GDP_pct_change],
-               fill_color='lavender',
+    cells=dict(values=[df_gdp.Quarter, df_gdp.GDP, df_gdp.Real_GDP, df_gdp.GDP_pct_change],
+            #    fill_color='lavender',
                align='left'))
                 ])
 
