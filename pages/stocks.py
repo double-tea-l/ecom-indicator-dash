@@ -9,20 +9,42 @@ import altair as alt
 import plotly.graph_objects as go
 from streamlit_navigation_bar import st_navbar
 from data import indicators_prep as ind_prep
+from data import stocks_data as sd
 
 
 def show_stocks():
 
-    df = pd.DataFrame({
-        "Index": ['SP500', 'DJIA', 'NASDAQ100'],
-        "Composition": ["500 Companies", "30 Blue-chip Companies", "100 Companies"],
-        "Market_Value": ['70-80% US Market','25%',' '],
-        "Method": ['Market Value Weighted Avg','Price Weighted Average','']
-    })
+    # Function to format MarketCap values
+    def format_marketcap(value):
+        if value >= 1_000_000_000_000:
+            return f"${value/1_000_000_000_000:.1f}T"
+        elif value >= 1_000_000_000:
+            return f"${value/1_000_000_000:.1f}B"
+        elif value >= 1_000_000:
+            return f"${value/1_000_000:.1f}M"
+        else:
+            return f"${value:.1f}K"
 
-    true_html = '<input type="checkbox" checked disabled="true">'
-    false_html = '<input type="checkbox" disabled="true">'
+    # Apply formatting to the MarketCap values
+    i = sd.get_stock_data
+    filtered_df = i.get_market_cap()
+    
+    filtered_df['MarketCap'] = filtered_df['marketCap'].apply(format_marketcap)
 
-    # df['D'] = df['D'].apply(lambda b: true_html if b else false_html)
+    # Create the bar plot
+    fig = px.bar(filtered_df.head(15), y='industry', x='MarketCap_pct', 
+                title='Market Cap Percentage by Industry (Top 10)',
+                labels={'industry': '', 'MarketCap_pct': 'Market Cap Percentage'},
+                orientation='h',
+                height=450,
+                text='MarketCap')  # Adding the formatted MarketCap as text labels
 
-    st.markdown(df.to_html(escape=False), unsafe_allow_html=True)
+    # Update layout to ensure x-axis labels fit and bars are sorted
+    fig.update_layout(
+        yaxis={'categoryorder':'total ascending'},  # Ensures bars are sorted by MarketCap_pct in descending order
+        xaxis_tickangle=0,  # Adjusts x-axis label angle to fit long strings
+        margin=dict(l=250, r=50)  # Adds left margin to accommodate long industry names
+    )
+
+    # Show the plot
+    fig.show()
