@@ -26,18 +26,3 @@ def show_stocks():
     # df['D'] = df['D'].apply(lambda b: true_html if b else false_html)
 
     st.markdown(df.to_html(escape=False), unsafe_allow_html=True)
-
-    # txt = st.text_area(
-    # "Text to analyze",
-    # "It was the best of times, it was the worst of times, it was the age of "
-    # "wisdom, it was the age of foolishness, it was the epoch of belief, it "
-    # "was the epoch of incredulity, it was the season of Light, it was the "
-    # "season of Darkness, it was the spring of hope, it was the winter of "
-    # "despair, (...)",
-    # )
-
-    # st.write(f"You wrote {len(txt)} characters.")
-
-# # Call the function to show indicators
-# if __name__ == "__main__":
-#     show_stocks()
