@@ -10,7 +10,7 @@ class get_stock_data():
         
         self.all_stocks = self.get_all_stocks()
         self.top_industries = self.get_top_industries()
-        self.top_100_stocks = self.get_top_100_stocks
+        self.top_100_stocks = self.get_top_100_stocks()
         self.top_stocks_by_group = self.get_top_stocks_by_group()
     # self.real_gdp = self.get_real_gdp()
 

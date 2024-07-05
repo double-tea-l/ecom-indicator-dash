@@ -8,31 +8,16 @@ import matplotlib.pyplot as plt
 import altair as alt
 import plotly.graph_objects as go
 from streamlit_navigation_bar import st_navbar
-from data import indicators_prep as ind_prep
-from data import stocks_data as sd
+from data import stocks_prep as sp
+import plotly_express as px
 
 
 def show_stocks():
 
-    # Function to format MarketCap values
-    def format_marketcap(value):
-        if value >= 1_000_000_000_000:
-            return f"${value/1_000_000_000_000:.1f}T"
-        elif value >= 1_000_000_000:
-            return f"${value/1_000_000_000:.1f}B"
-        elif value >= 1_000_000:
-            return f"${value/1_000_000:.1f}M"
-        else:
-            return f"${value:.1f}K"
-
-    # Apply formatting to the MarketCap values
-    i = sd.get_stock_data
-    filtered_df = i.get_market_cap()
-    
-    filtered_df['MarketCap'] = filtered_df['marketCap'].apply(format_marketcap)
+    df = sp.df_top_industries_by_market_cap()
 
     # Create the bar plot
-    fig = px.bar(filtered_df.head(15), y='industry', x='MarketCap_pct', 
+    fig = px.bar(df.head(15), y='industry', x='MarketCap_pct', 
                 title='Market Cap Percentage by Industry (Top 10)',
                 labels={'industry': '', 'MarketCap_pct': 'Market Cap Percentage'},
                 orientation='h',
