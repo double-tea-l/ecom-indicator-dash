@@ -21,7 +21,7 @@ def df_top_industries_by_market_cap():
             return f"${value:.1f}K"
 
 
-    top_industries = i.get_top_industries()
+    top_industries = i.top_industries
     
     top_industries['MarketCap'] = top_industries['marketCap'].apply(format_marketcap)
     
@@ -31,3 +31,12 @@ def df_top_industries_by_market_cap():
     # top_industries = i.get_top_industries()
     # top_100_stocks = i.get_top_100_stocks()
     # top_stocks_by_group = i.get_top_stocks_by_group()
+    
+    
+def df_top_100_stocks():
+    
+    i = sd.get_stock_data()
+    top_100_stocks = i.get_top_100_stocks()
+    
+    return df_top_100_stocks
+   

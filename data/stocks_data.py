@@ -34,12 +34,12 @@ class get_stock_data():
             df_tmp['Exchange'] = key
             df_all_stocks = pd.concat([df_all_stocks, df_tmp], ignore_index = True)
 
-        df_all_stocks['marketCap'] = pd.to_numeric(df['marketCap'], errors='coerce')
+        df_all_stocks['marketCap'] = pd.to_numeric(df_all_stocks['marketCap'], errors='coerce')
         df_all_stocks['marketCap'] = df_all_stocks['marketCap'].fillna(0)
         df_all_stocks['marketCap'] = df_all_stocks['marketCap'].astype(int)
 
         df_all_stocks = df_all_stocks.sort_values(by=['marketCap'], ascending= False).reset_index(drop = True)
-        df_all_stocks['MarketCap_pct'] = df['marketCap'] / df_all_stocks['marketCap'].sum()
+        df_all_stocks['MarketCap_pct'] = df_all_stocks['marketCap'] / df_all_stocks['marketCap'].sum()
         df_all_stocks['MarketCap_pct_cumsum'] = df_all_stocks['MarketCap_pct'].cumsum()
 
         # Fill empty values in 'industry' and 'sector' columns with 'Other'
@@ -50,7 +50,7 @@ class get_stock_data():
     
     def get_top_industries(self):
         
-        df_all_stocks = self.df_all_stocks
+        df_all_stocks = self.get_all_stocks()
         
         sorted_industry_marketcap_sum = df_all_stocks.groupby('industry').agg({
             'MarketCap_pct': 'sum',
@@ -74,7 +74,7 @@ class get_stock_data():
 
     def get_top_100_stocks(self):
         
-        df = self.df_all_stocks
+        df = self.get_all_stocks()
         
         top_100_stocks = df.head(100)
     
@@ -83,7 +83,7 @@ class get_stock_data():
 
     def get_top_stocks_by_group(self):
         
-        df = self.df_all_stocks
+        df = self.get_all_stocks()
         
         top_10_stocks_per_industry = df.groupby('industry').apply(lambda x: x.nlargest(10, 'marketCap')).reset_index(drop=True)
         top_10_stocks_per_sector = df.groupby('sector').apply(lambda x: x.nlargest(10, 'marketCap')).reset_index(drop=True)
@@ -91,6 +91,6 @@ class get_stock_data():
         top_10_stocks_per_industry['Categorty'] = 'Top_10_Stocks_per_Industry'
         top_10_stocks_per_industry['Categorty'] = 'Top_10_Stocks_per_Sector'
         
-        top_stocks_by_group = pd.concat(top_10_stocks_per_industry, top_10_stocks_per_sector)
+        top_stocks_by_group = pd.concat([top_10_stocks_per_industry, top_10_stocks_per_sector])
     
         return top_stocks_by_group
