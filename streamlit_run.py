@@ -59,7 +59,8 @@ page = st_navbar(
 
 functions = {
     "Indicators": pg.show_indicators,
-    "Stock Index": pg.show_stocks
+    "Stock Index": pg.show_stocks,
+    # "Knowledge": pg.show_knowledge
 }
 go_to = functions.get(page)
 if go_to:

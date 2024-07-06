@@ -49,42 +49,57 @@ def show_stocks():
 
     df_top_100_stocks = sp.df_top_100_stocks()
      # Create a bar plot using Plotly Graph Objects
-    fig_2 = go.Figure()
 
-    fig_2.add_trace(go.Bar(
-        y=df_top_100_stocks['symbol'],
-        x=df_top_100_stocks['MarketCap_pct'],
-        text=df_top_100_stocks['MarketCap'],
-        orientation='h',
-        marker=dict(
-            color='rgba(50, 171, 96, 0.6)',
-            line=dict(color='rgba(50, 171, 96, 1.0)', width=1)
+    # Create a table using Plotly Graph Objects
+    fig_2 = go.Figure(data=[go.Table(
+        header=dict(
+            values=list(df_top_100_stocks.columns),
+            fill_color='paleturquoise',
+            align='left'
+        ),
+        cells=dict(
+            values=[df_top_100_stocks[col].tolist() for col in df_top_100_stocks.columns],
+            fill_color='lavender',
+            align='left'
         )
-    ))
+    )])
 
-    # Update layout for better visualization
+    # Update layout for better visualization and scrolling
     fig_2.update_layout(
-        title='Market Cap Percentage by Company (Top 100)',
-        xaxis=dict(
-            title='Market Cap Percentage',
-            tickangle=0
-        ),
-        yaxis=dict(
-            title='',
-            categoryorder='total ascending'  # Ensure bars are sorted by MarketCap_pct
-        ),
-        margin=dict(l=250, r=50),  # Add left margin to accommodate long industry names
-        height=450
-    )   
-    
-    
-    # Display the plots in Streamlit using columns
-    col1, col2 = st.columns(2)
+        title='Top 100 Stocks Information',
+        height=600,  # Adjust height as needed
+        margin=dict(l=0, r=0, b=0, t=50),  # Adjust margins as needed
+    )
 
-    with col1:
-        st.plotly_chart(fig_1, use_container_width=True)
+    df_top_stocks_by_group = sp.df_top_stocks_by_group()
+    # Streamlit app
+    # st.title('Stock Symbols by Industry and Sector')
 
-    with col2:
-        st.plotly_chart(fig_2, use_container_width=True)
+    # Filters
+    selected_industry = st.selectbox('Select Industry', options=['All'] + sorted(df_top_stocks_by_group['industry'].unique().tolist()))
+    selected_sector = st.selectbox('Select Sector', options=['All'] + sorted(df_top_stocks_by_group['sector'].unique().tolist()))
+
+    # Filtering logic
+    if selected_industry != 'All':
+        df_top_stocks_by_group = df_top_stocks_by_group[df_top_stocks_by_group['industry'] == selected_industry]
+
+    if selected_sector != 'All':
+        df_top_stocks_by_group = df_top_stocks_by_group[df_top_stocks_by_group['sector'] == selected_sector]
+
+    # Plotly table
+    fig_3 = go.Figure(data=[go.Table(
+        header=dict(values=list(df_top_stocks_by_group.columns),
+                    fill_color='paleturquoise',
+                    align='left'),
+        cells=dict(values=[df_top_stocks_by_group.symbol, df_top_stocks_by_group.industry, df_top_stocks_by_group.sector],
+                fill_color='lavender',
+                align='left'))
+    ])
+
+
+    # Display the table
+    st.plotly_chart(fig_1, use_container_width=True)
+    st.plotly_chart(fig_2, use_container_width=True)
+    st.plotly_chart(fig_3, use_container_width=True)
 
 # To run the Streamlit app, save this script as `app.py` and run `streamlit run app.py`

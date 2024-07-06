@@ -36,7 +36,15 @@ def df_top_industries_by_market_cap():
 def df_top_100_stocks():
     
     i = sd.get_stock_data()
-    top_100_stocks = i.get_top_100_stocks()
+    top_100_stocks = i.top_100_stocks
     
-    return df_top_100_stocks
-   
+    return top_100_stocks
+
+
+def df_top_stocks_by_group():
+
+    i = sd.get_stock_data()
+    top_stocks_by_group = i.get_top_stocks_by_group()
+    
+    return top_stocks_by_group
+    
